@@ -1,3 +1,6 @@
+using Domain.Repositories;
+using Infraestructure.Migrations;
+using Infraestructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -22,12 +25,15 @@ namespace Presentation
         {
 
             services.AddControllersWithViews();
-
+            services.AddScoped<ISupplierRepository,SuppliersRepository>();
+            services.AddDbContext<SupplierServicesContext>();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/build";
             });
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
