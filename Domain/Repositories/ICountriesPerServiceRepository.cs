@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    public interface ICountriesPerServiceRepository<TEntity, TEntityID> : IAttach<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID> , ITransaction
+    public interface ICountriesPerServiceRepository<TEntity, TEntityID> : IAdd<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID> , ITransaction
     {
     }
 }

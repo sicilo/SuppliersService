@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Repositories;
-using Models.Entities;
+using Models.Dtos;
 using System;
 using System.Collections.Generic;
 
@@ -15,12 +15,12 @@ namespace Application.Services
             countriesPerServiceRepository = _countriesPerServiceRepository;
         }
 
-        public CountriesPerService Attach(CountriesPerService entity)
+        public CountriesPerService Add(CountriesPerService entity)
         {
             if(entity == null)
                 throw new ArgumentNullException("Service is required");
 
-            CountriesPerService result = countriesPerServiceRepository.Attach(entity);
+            CountriesPerService result = countriesPerServiceRepository.Add(entity);
             countriesPerServiceRepository.SaveAllChanges();
             return result;
         }

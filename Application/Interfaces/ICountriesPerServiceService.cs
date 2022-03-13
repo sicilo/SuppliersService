@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    interface ICountriesPerServiceService<TEntity, TEntityID> : IAttach<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID>
+    interface ICountriesPerServiceService<TEntity, TEntityID> : IAdd<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID>
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    public interface IBaseRepository<TEntity,TEntityID> : IAttach<TEntity>, IEdit<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID> , ITransaction
+    public interface IBaseRepository<TEntity,TEntityID> : IAdd<TEntity>, IEdit<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID> , ITransaction
     {
     }
 }

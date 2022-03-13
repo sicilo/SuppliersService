@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Interfaces
 {
-    interface IBaseService<TEntity, TEntityID> : IAttach<TEntity> , IEdit<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID>
+    interface IBaseService<TEntity, TEntityID> : IAdd<TEntity> , IEdit<TEntity>, IDelete<TEntityID>, IToList<TEntity, TEntityID>
     {
     }
 }

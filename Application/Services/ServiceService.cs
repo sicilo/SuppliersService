@@ -1,6 +1,6 @@
 ﻿using Application.Interfaces;
 using Domain.Repositories;
-using Models.Entities;
+using Models.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +18,12 @@ namespace Application.Services
             serviceRepository = _serviceRepository;
         }
 
-        public Service Attach(Service entity)
+        public Service Add(Service entity)
         {
             if(entity == null)
                 throw new ArgumentNullException("Service is required");
 
-            Service result = serviceRepository.Attach(entity);
+            Service result = serviceRepository.Add(entity);
             serviceRepository.SaveAllChanges();
 
             return result;

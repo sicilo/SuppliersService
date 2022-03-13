@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Repositories
+namespace Domain.Interfaces
 {
-    public interface IServiceRepository<TEntity, TEntityID> : IBaseRepository<TEntity, TEntityID>
+    public  interface IAdd<TEntity>
     {
+        TEntity Add(TEntity entity);
     }
 }

@@ -18,12 +18,12 @@ namespace Application.Services
             supplierRepository = _supplierRepository;
         }
 
-        public Supplier Attach(Supplier entity)
+        public Supplier Add(Supplier entity)
         {
             if (entity == null)
                 throw new ArgumentNullException("Supplier is required");
 
-            Supplier result = supplierRepository.Attach(entity);
+            Supplier result = supplierRepository.Add(entity);
             supplierRepository.SaveAllChanges();
 
             return result;
