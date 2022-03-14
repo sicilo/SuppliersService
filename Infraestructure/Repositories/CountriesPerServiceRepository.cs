@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infraestructure.Repositories
 {
-    internal class CountriesPerServiceRepository : ICountriesPerServiceRepository<CountriesPerService,int>
+    public class CountriesPerServiceRepository : ICountriesPerServiceRepository<CountriesPerService,int>
     {
         private readonly SupplierContext context;
 

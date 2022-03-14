@@ -16,16 +16,9 @@ namespace Presentation.Controllers
 
         private readonly ServiceService serviceService;
 
-        ServiceService CreateService()
+        public ServiceController(ServiceRepository _service)
         {
-            SupplierContext context = new();
-            ServiceRepository serviceRepo = new(context);
-            return new ServiceService(serviceRepo);
-        }
-
-        public ServiceController()
-        {
-            serviceService = CreateService();
+            serviceService = new(_service);
         }
 
         [HttpGet]

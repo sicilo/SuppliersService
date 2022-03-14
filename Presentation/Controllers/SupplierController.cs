@@ -1,5 +1,4 @@
 ﻿using Application.Services;
-using Infraestructure.Contexts;
 using Infraestructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dtos;
@@ -13,16 +12,9 @@ namespace Presentation.Controllers
     {
         private readonly SupplierService supplierService;
 
-        SupplierService CreateService()
+        public SupplierController(SupplierRepository _supplier)
         {
-            SupplierContext context = new();
-            SupplierRepository supplierRepo = new(context);
-            return new SupplierService(supplierRepo);
-        }
-
-        public SupplierController()
-        {
-            supplierService = CreateService();
+            supplierService = new (_supplier);
         }
 
         [HttpGet]
