@@ -11,7 +11,7 @@ namespace Infraestructure.Repositories
 {
     internal class CountriesPerServiceRepository : ICountriesPerServiceRepository<CountriesPerService,int>
     {
-        private SupplierContext context;
+        private readonly SupplierContext context;
 
         public CountriesPerServiceRepository(SupplierContext _context)
         {
@@ -20,15 +20,15 @@ namespace Infraestructure.Repositories
 
         public CountriesPerService Add(CountriesPerService entity)
         {
-            context.CountriesPerService.Add(entity);
+            context.CountriesPerServices.Add(entity);
             return entity;
         }
 
         public void Delete(int entityId)
         {
-            CountriesPerService country = context.CountriesPerService.Where(s => s.Id == entityId).FirstOrDefault();
+            CountriesPerService country = context.CountriesPerServices.Where(s => s.Id == entityId).FirstOrDefault();
             if (country != null)
-                context.CountriesPerService.Remove(country);
+                context.CountriesPerServices.Remove(country);
         }
 
         public void SaveAllChanges()
@@ -38,13 +38,13 @@ namespace Infraestructure.Repositories
 
         public CountriesPerService SelectById(int entityId)
         {
-            CountriesPerService country = context.CountriesPerService.Where(s => s.Id == entityId).FirstOrDefault();
+            CountriesPerService country = context.CountriesPerServices.Where(s => s.Id == entityId).FirstOrDefault();
             return country;
         }
 
         public List<CountriesPerService> ToList()
         {
-            return context.CountriesPerService.ToList();
+            return context.CountriesPerServices.ToList();
         }
     }
 }

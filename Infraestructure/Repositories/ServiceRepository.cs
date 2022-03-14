@@ -12,7 +12,7 @@ namespace Infraestructure.Repositories
 {
     public class ServiceRepository : IBaseRepository<Service, int>
     {
-        private SupplierContext context;
+        private readonly SupplierContext context;
 
         public ServiceRepository(SupplierContext _context)
         {
@@ -21,23 +21,23 @@ namespace Infraestructure.Repositories
 
         public Service Add(Service entity)
         {
-            context.Service.Add(entity);
+            context.Services.Add(entity);
             return entity;
         }
 
         public void Delete(int entityId)
         {
-            Service service = context.Service.Where(s => s.Id == entityId).FirstOrDefault();
+            Service service = context.Services.Where(s => s.Id == entityId).FirstOrDefault();
             if (service != null)
-                context.Service.Remove(service);
+                context.Services.Remove(service);
         }
 
         public void Edit(Service entity)
         {
-            Service service = context.Service.Where(s => s.Id == entity.Id).FirstOrDefault();
+            Service service = context.Services.Where(s => s.Id == entity.Id).FirstOrDefault();
             if (service != null)
             {
-                context.Service.Attach(service);
+                context.Services.Attach(service);
                 context.Entry(service).State = EntityState.Modified;
             }
         }
@@ -49,13 +49,13 @@ namespace Infraestructure.Repositories
 
         public Service SelectById(int entityId)
         {
-            Service service = context.Service.Where(s => s.Id == entityId).FirstOrDefault();
+            Service service = context.Services.Where(s => s.Id == entityId).FirstOrDefault();
             return service;
         }
 
         public List<Service> ToList()
         {
-            return context.Service.ToList();
+            return context.Services.ToList();
         }
     }
 }

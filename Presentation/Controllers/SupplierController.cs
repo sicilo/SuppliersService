@@ -1,10 +1,9 @@
-﻿using Domain.Repositories;
+﻿using Application.Services;
+using Infraestructure.Contexts;
+using Infraestructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System;
-using Models.Entities;
-using AutoMapper;
 using Models.Dtos;
+using System.Collections.Generic;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,46 +13,55 @@ namespace Presentation.Controllers
     [ApiController]
     public class SupplierController : ControllerBase
     {
-        private readonly ISupplierRepository iSupplierRepository;
-        private readonly IMapper mapper;
+        private readonly SupplierService supplierService;
 
-        public SupplierController(ISupplierRepository _iSupplierRepository,IMapper _mapper)
+        SupplierService CreateService()
         {
-            iSupplierRepository = _iSupplierRepository;
-            mapper = _mapper;
+            SupplierContext context = new();
+            SupplierRepository supplierRepo = new(context);
+            return new SupplierService(supplierRepo);
         }
-        // GET: api/<SupplierController>
+
+        public SupplierController() 
+        {
+            supplierService = CreateService();
+        }
+
+        // GET: api/<SuppliersController>
         [HttpGet]
-        public List<Supplier> Get()
+        public ActionResult<List<Supplier>> Get()
         {
-            List<Supplier> sup = iSupplierRepository.GetSuppliers();
-            //List<SupplierResponse> suppliers = mapper.Map<List<SupplierResponse>>(sup);
-            return sup;
+            return Ok(supplierService.ToList());
         }
 
-        // GET api/<SupplierController>/5
+        // GET api/<SuppliersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Supplier> Get(int id)
         {
-            return "value";
+            return Ok(supplierService.SelectById(id));
         }
 
-        // POST api/<SupplierController>
+        // POST api/<SuppliersController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] Supplier supplier)
         {
+            return Ok(supplierService.Add(supplier));
         }
 
-        // PUT api/<SupplierController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT api/<SuppliersController>/5
+        //[HttpPut("{id}")]
+        public ActionResult Put([FromBody] Supplier supplier)
         {
+            supplierService.Edit(supplier);
+            return Ok("Supplier Updated");
         }
 
-        // DELETE api/<SupplierController>/5
+        // DELETE api/<SuppliersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
+            supplierService.Delete(id);
+            return Ok("Supplier Deleted");
         }
     }
 }

@@ -11,9 +11,9 @@ namespace Infraestructure.Contexts
 {
     public class SupplierContext : DbContext
     {
-        public DbSet<Supplier> Supplier { get; set;}
-        public DbSet<Service> Service { get; set;}
-        public DbSet<CountriesPerService> CountriesPerService { get; set; }
+        public DbSet<Supplier> Suppliers { get; set;}
+        public DbSet<Service> Services { get; set;}
+        public DbSet<CountriesPerService> CountriesPerServices { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

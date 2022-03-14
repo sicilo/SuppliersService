@@ -1,5 +1,4 @@
 ﻿using Domain.Repositories;
-using Infraestructure.Migrations;
 using Models.Dtos;
 using System;
 using Microsoft.EntityFrameworkCore;
@@ -11,34 +10,34 @@ using Infraestructure.Contexts;
 
 namespace Infraestructure.Repositories
 {
-    public class SuppliersRepository : IBaseRepository<Supplier, int>
+    public class SupplierRepository : IBaseRepository<Supplier, int>
     {
-        private SupplierContext context;
+        private readonly SupplierContext context;
 
-        public SuppliersRepository(SupplierContext _context)
+        public SupplierRepository(SupplierContext _context)
         {
             context = _context;
         }
 
         public Supplier Add(Supplier entity)
         {
-            context.Supplier.Add(entity);
+            context.Suppliers.Add(entity);
             return entity;
         }
 
         public void Delete(int entityId)
         {
-            Supplier supplier = context.Supplier.Where(s => s.Id == entityId).FirstOrDefault();
+            Supplier supplier = context.Suppliers.Where(s => s.Id == entityId).FirstOrDefault();
             if (supplier != null)
-                context.Supplier.Remove(supplier);
+                context.Suppliers.Remove(supplier);
         }
 
         public void Edit(Supplier entity)
         {
-            Supplier supplier = context.Supplier.Where(s => s.Id == entity.Id).FirstOrDefault();
+            Supplier supplier = context.Suppliers.Where(s => s.Id == entity.Id).FirstOrDefault();
             if (supplier != null)
             {
-                context.Supplier.Attach(supplier);
+                context.Suppliers.Attach(supplier);
                 context.Entry(supplier).State = EntityState.Modified;
             }
         }
@@ -50,13 +49,13 @@ namespace Infraestructure.Repositories
 
         public Supplier SelectById(int entityId)
         {
-            Supplier supplier = context.Supplier.Where(s => s.Id == entityId).FirstOrDefault();
+            Supplier supplier = context.Suppliers.Where(s => s.Id == entityId).FirstOrDefault();
             return supplier;
         }
 
         public List<Supplier> ToList()
         {
-            return context.Supplier.ToList();
+            return context.Suppliers.ToList();
         }
     }
     //public class SuppliersRepository : ISupplierRepository

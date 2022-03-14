@@ -1,6 +1,5 @@
 using Domain.Repositories;
-using Infraestructure.Migrations;
-using Infraestructure.Repositories;
+using Infraestructure.Contexts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,8 +24,8 @@ namespace Presentation
         {
 
             services.AddControllersWithViews();
-            services.AddScoped<ISupplierRepository,SuppliersRepository>();
-            services.AddDbContext<SupplierServicesContext>();
+            
+            //services.AddDbContext<SupplierContext>();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
