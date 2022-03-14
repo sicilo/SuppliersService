@@ -1,7 +1,9 @@
 ﻿using Application.Services;
+using AutoMapper;
 using Infraestructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Models.Dtos;
+using Models.Entities;
 using System.Collections.Generic;
 
 namespace Presentation.Controllers
@@ -12,9 +14,12 @@ namespace Presentation.Controllers
     {
         private readonly SupplierService supplierService;
 
-        public SupplierController(SupplierRepository _supplier)
+        private readonly IMapper mapper;
+
+        public SupplierController(SupplierRepository _supplier,IMapper _mapper)
         {
             supplierService = new (_supplier);
+            mapper = _mapper;
         }
 
         [HttpGet]
@@ -30,9 +35,11 @@ namespace Presentation.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] Supplier supplier)
+        public ActionResult<SupplierResponse> Post([FromBody] SupplierRequest supplierRequest)
         {
-            return Ok(supplierService.Add(supplier));
+            Supplier supplier = mapper.Map<Supplier>(supplierRequest);
+            Supplier newSupplier = supplierService.Add(supplier);
+            return Ok(mapper.Map<SupplierResponse>(newSupplier));
         }
 
         [HttpPut]
