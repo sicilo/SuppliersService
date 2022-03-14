@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Models.Dtos;
 using System.Collections.Generic;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Presentation.Controllers
 {
     [Route("api/[controller]")]
@@ -22,7 +20,7 @@ namespace Presentation.Controllers
             return new SupplierService(supplierRepo);
         }
 
-        public SupplierController() 
+        public SupplierController()
         {
             supplierService = CreateService();
         }
