@@ -28,10 +28,10 @@ namespace Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SupplierContext>(ServiceLifetime.Singleton);
-            services.AddSingleton<SupplierRepository>();
-            services.AddSingleton<ServiceRepository>();
-            services.AddSingleton<CountriesPerServiceRepository>();
+            services.AddDbContext<SupplierContext>(ServiceLifetime.Scoped);
+            services.AddScoped<SupplierRepository>();
+            services.AddScoped<ServiceRepository>();
+            services.AddScoped<CountriesPerServiceRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
